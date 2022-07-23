@@ -6,4 +6,8 @@ using Pedro.StateMachine;
 public class GMStateIntro : StateBase
 {
     
+    public override void OnStateEnter()
+    {
+        base.OnStateEnter();
+    }
 }

@@ -6,6 +6,9 @@ using Pedro.StateMachine;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    public Player player;
+
     public enum GameStates
     {
         INTRO,
@@ -28,16 +31,18 @@ public class GameManager : Singleton<GameManager>
 
         stateMachine.Init();
         stateMachine.RegisterStates(GameStates.INTRO, new GMStateIntro());
+        stateMachine.RegisterStates(GameStates.GAMEPLAY, new GMStatePlay());
         stateMachine.RegisterStates(GameStates.WIN, new StateBase());
         stateMachine.RegisterStates(GameStates.PAUSE, new StateBase());
         stateMachine.RegisterStates(GameStates.LOSE, new StateBase());
-        stateMachine.RegisterStates(GameStates.GAMEPLAY, new StateBase());
 
         stateMachine.SwitchState(GameStates.INTRO);
     }
 
-    public void InitGame()
+    public void InitGame(bool run)
     {
+        player.canRun = run;
+        stateMachine.SwitchState(GameStates.GAMEPLAY);
 
     }
 }
